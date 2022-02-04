@@ -27,6 +27,9 @@ class Magicien extends \Personnage {
   public function getMagie() {
     return $this->magie;
   }
+  public function walk() {
+    echo $this->getNom() . " marche ! [CLASSE Magicien V1] <br>"; 
+  }
 }
 
 namespace Studio\Lotr\v2;
@@ -61,5 +64,9 @@ class Magicien extends \Personnage {
   }
   public function getMagie() {
     return $this->magie;
+  }
+
+  public function walk() {
+    echo $this->getNom() . " marche ! [CLASSE Magicien V2] <br>"; 
   }
 }

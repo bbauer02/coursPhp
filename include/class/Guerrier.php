@@ -1,7 +1,24 @@
 <?php
 namespace Studio\Lotr\v1;
 
+interface TemplatePersonnage {
+  public function jump();
+  public function walk();
+}
+
+
+
 require_once('Personnage.php');
+
+class Sorcier implements TemplatePersonnage
+{
+  public function jump() {
+
+  }
+  public function walk() {
+
+  }
+}
 
 class Guerrier extends \Personnage {
   private $force;
@@ -27,6 +44,17 @@ class Guerrier extends \Personnage {
     $target->setHurt($degat);
     echo $this->getNom() . " donne un coup de pied et inflige <strong> $degat </strong> points de dégats à <strong>". $target->getNom()."</strong> <br>"; 
   } 
+
+
+  public function jump() {
+    echo $this->getNom() . " saute très haut ! [CLASSE Guerrier] <br>";
+  }
+
+  public function walk() {
+    echo $this->getNom() . " marche ! [CLASSE Guerrier] <br>"; 
+  }
+
+
 }
 
 
@@ -64,5 +92,8 @@ class Guerrier extends \Personnage {
     $target->setHurt($degat);
     echo $this->getNom() . " donne un coup d'épée et inflige <strong> $degat </strong> points de dégats à <strong>". $target->getNom()."</strong> <br>"; 
   } 
+  public function walk() {
+    echo $this->getNom() . " marche ! [CLASSE Guerrier] <br>"; 
+  }
   
 }

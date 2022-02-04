@@ -1,6 +1,11 @@
 ﻿<?php 
 require_once('DbConnect.php');
 
+
+
+
+
+
 class PersonnageManager extends DbConnect {
 
   public function save($personne) {
@@ -25,7 +30,6 @@ class PersonnageManager extends DbConnect {
 	
   }
   
-  
   public function edit($personne) {
     $sth = $this->bdd->prepare("UPDATE `personnage` SET `pdv` = :pdv, `force` = :force, `magie` = :magie, `classe` = :classe WHERE nom = :nom");
     $nom = $personne->getNom();
@@ -45,17 +49,13 @@ class PersonnageManager extends DbConnect {
     $sth->bindParam(':force', $force,PDO::PARAM_INT);
     $sth->bindParam(':classe', $classe ,PDO::PARAM_STR);
     $sth->execute();
-	
   }
   
   public function delete($personne) {
     $sth = $this->bdd->prepare("DELETE FROM `personnage` WHERE nom = :nom ");
     $nom = $personne->getNom();
-    
     $sth->bindParam(':nom', $nom ,PDO::PARAM_STR);
-    $sth->execute();
-	
-	var_dump($sth);
+    $sth->execute();	
   }
   
 }

@@ -26,22 +26,21 @@ use \Studio\Lotr\v2\Guerrier as GuerrierV2;
 $Gandalf = new MagicienV1("Gandalf", 200, 150);
 $Aragorn = new Guerrier("Aragorn", 200, 150);
 $Gandalfv2 = new MagicienV2("Gandalf le Blanc", 200, 150);
-
 $Aragornv2 = new GuerrierV2("Aragorn armé", 200, 200);
-
-$Aragornv2->swordAttack($Gandalfv2);
-var_dump($Aragornv2);
+$Aragorn = new Guerrier("Aragorn", 100, 250);
 
 
-$manager = new PersonnageManager();
-var_dump($manager);
+$Gandalf->walk();
+$Aragorn->walk();
+
+
+
 
 //$manager->save($Aragorn);
 
 
-$Aragorn = new Guerrier("Aragorn", 100, 250);
 
-$manager->edit($Aragorn);
+
 
 //$manager->delete($Aragorn);
 

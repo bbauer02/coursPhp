@@ -1,7 +1,8 @@
 ﻿<?php 
 require_once('Personnage.php');
 
-class Personnage {
+abstract class Personnage {
+
   private $nom;
   private $pdv; 
 
@@ -28,6 +29,11 @@ class Personnage {
     $newPdv = $this->getPdv() - $hit;
     $this->setPdv($newPdv);
   }
- 
+
+  public function jump() {
+    echo "$this->nom  saute haut ! [CLASSE Personnage] <br>";
+  }
+
+  abstract public function walk();
 
 }
