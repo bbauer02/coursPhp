@@ -1,10 +1,11 @@
-﻿<?php 
+<?php 
 require_once('DbConnect.php');
+
 
 class UserManager extends DbConnect {
   
 
-  public function add(User $user) {
+  public function add( User $user ) {
     try {
       $sth = $this->bdd->prepare("INSERT INTO `user`(`id`, `role`, `name`, `lastname`, `email`, `login`, `password`) VALUES (0,:role,:name,:lastname,:email,:login, :password)");
       
@@ -15,17 +16,17 @@ class UserManager extends DbConnect {
       $login = $user->getLogin();
       $password = $user->getPassword();
       
-      $sth->bindParam(':role', $role ,PDO::PARAM_INT);
-      $sth->bindParam(':name', $name ,PDO::PARAM_STR);
-      $sth->bindParam(':lastname', $lastname ,PDO::PARAM_STR);
-      $sth->bindParam(':email', $email ,PDO::PARAM_STR);
-      $sth->bindParam(':login', $login ,PDO::PARAM_STR);
-      $sth->bindParam(':password', $password ,PDO::PARAM_STR);
+      $sth->bindParam(':role', $role ,\PDO::PARAM_INT);
+      $sth->bindParam(':name', $name ,\PDO::PARAM_STR);
+      $sth->bindParam(':lastname', $lastname ,\PDO::PARAM_STR);
+      $sth->bindParam(':email', $email ,\PDO::PARAM_STR);
+      $sth->bindParam(':login', $login ,\PDO::PARAM_STR);
+      $sth->bindParam(':password', $password ,\PDO::PARAM_STR);
       $sth->execute();
       $user->setId($this->bdd->lastInsertId());
       return true;
     }
-    catch(Exception $e) {
+    catch(\Exception $e) {
       die("Erreur lors de l'ajout");
     }
   }
@@ -38,16 +39,16 @@ class UserManager extends DbConnect {
       $email = $user->getEmail();
       $login = $user->getLogin();
       $password = $user->getPassword();
-      $sth->bindParam(':role', $role ,PDO::PARAM_INT);
-      $sth->bindParam(':name', $name ,PDO::PARAM_STR);
-      $sth->bindParam(':lastname', $lastname ,PDO::PARAM_STR);
-      $sth->bindParam(':email', $email ,PDO::PARAM_STR);
-      $sth->bindParam(':login', $login ,PDO::PARAM_STR);
-      $sth->bindParam(':password', $password ,PDO::PARAM_STR);
+      $sth->bindParam(':role', $role ,\PDO::PARAM_INT);
+      $sth->bindParam(':name', $name ,\PDO::PARAM_STR);
+      $sth->bindParam(':lastname', $lastname ,\PDO::PARAM_STR);
+      $sth->bindParam(':email', $email ,\PDO::PARAM_STR);
+      $sth->bindParam(':login', $login ,\PDO::PARAM_STR);
+      $sth->bindParam(':password', $password ,\PDO::PARAM_STR);
       $sth->execute();
       return true;
     }
-    catch(Exception $e) {
+    catch(\Exception $e) {
       die("Erreur lors de la modification");
     }
   }
@@ -55,10 +56,10 @@ class UserManager extends DbConnect {
     try {
       $sth = $this->bdd->prepare("DELETE FROM `user` WHERE id = :id ");
       $id = $user->getId();
-      $sth->bindParam(':id', $id ,PDO::PARAM_INT);
+      $sth->bindParam(':id', $id ,\PDO::PARAM_INT);
       $sth->execute();
     }
-    catch(Exception $e) {
+    catch(\Exception $e) {
       die("Erreur lors de la suppression");
     }	
   }
@@ -67,12 +68,15 @@ class UserManager extends DbConnect {
     try {
       $sth = $this->bdd->prepare("SELECT id,role, name, lastname, email,login  FROM `user` ORDER BY lastname, name");
       $sth->execute();
-      $users = $sth->fetchAll();
-      return $users;
+      $users = $sth->fetchAll(\PDO::FETCH_ASSOC);
+      $Users = [];
+      foreach($users as $user) {
+        $Users[] = new \User($user['id'],$user['role'],$user['name'], $user['lastname'],$user['email'], $user['login'] );
+      }
+      return $Users;
     }
-    catch(Exception $e) {
+    catch(\Exception $e) {
       die("Erreur lors de la suppression");
     }	
   }
-
 }

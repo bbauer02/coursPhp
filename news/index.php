@@ -1,22 +1,20 @@
 ﻿<?php 
-
+include('class/newsManager.php');
 include('class/userManager.php');
 include('class/user.php');
 
+
 $userManager = new UserManager();
 $users = $userManager->selectAll();
-foreach($users as $user) {
-  var_dump($user);
-}
 
-/*
-if(isset($_GET["action"]) && $_GET["action"] == "subscribe") 
-{
-  $user = new User(null ,1, $_POST['name'], $_POST['lastname'], $_POST['email'], $_POST['login'], $_POST['password']);
-  $userManager = new UserManager();
-  $userManager->add($user);
-  echo "Inscription reussie !!";
-}*/
+echo "<ul>";
+foreach($users as $user) {
+  echo "<li>";
+    echo $user->getName(). " " . $user->getLastname();
+  echo "</li>";
+} 
+echo "</ul>";
+
 ?>
 
 
