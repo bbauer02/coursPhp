@@ -64,9 +64,9 @@ $news_count = count($news_list);
 						foreach($news_list as $news) { 
 							echo '
 							<tr>	
-								<td class="titre_ligne ligne_hide1 titre'.$j.'">'.$news->getDate().'</td>
+								<td class="titre_ligne ligne_hide1 titre'.$j.'">'.date("d/m/Y",strtotime ($news->getDate())) .'</td>
 								<td class="titre_ligne ligne_hide1 titre'.$j.'">'.$news->getTitle().'</td>
-								<td class="titre_ligne ligne_hide2 titre'.$j.'">'.$news->getAuthor().'</td>						
+								<td class="titre_ligne ligne_hide2 titre'.$j.'">'.$news->getAuthor()->getName(). ' ' . $news->getAuthor()->getLastname() .'</td>						
 								<td class="titre_ligne titre'.$j.' titre_b" valign="middle" align="center" width="25px"><a href="news_edit.php?news='.$news->getId().'" title="Modifier l\'actualité '.$news->getTitle().'"><img class="img" src="img/administration/modifier.png"/></a></td>
 								<td class="titre_ligne ligne_hide3 titre'.$j.' titre_b" valign="middle" align="center" width="25px"><a href="news_delete.php?news='.$news->getId().'" title="Supprimer l\'actualité '.$news->getTitle().'"><img class="img" src="img/administration/supprimer.png"/></a></td>
 							</tr>

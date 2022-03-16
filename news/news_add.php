@@ -14,12 +14,12 @@ $obligatoire='<font class="obligatoire">*</font>';
 $avert1 = ""; $avert2 = ""; $avert3 = ""; $avert4 = "";
 
 if(empty($_POST)){
-	$_POST['submit_news'] = ""; $title = ''; $date = ''; $author = ''; $content = '';
+	$_POST['submit_news'] = ""; $title = ''; $date = ''; $authorId = ''; $content = '';
 }
 else {
 	$title = trim($_POST['title']);
 	$date = trim($_POST['date']);
-	$author = trim($_POST['author']);
+	$authorId = trim($_POST['author']);
 	$content = trim($_POST['content']);
 }
 
@@ -32,7 +32,7 @@ if($_POST['submit_news']=='Ajouter'){
 	if(
 		$title == '' ||
 		$date == '' ||
-		$author == '' ||
+		$authorId == '' ||
 		$content == ''
 	){
 		
@@ -43,7 +43,7 @@ if($_POST['submit_news']=='Ajouter'){
 		if($date == ''){
 	    	$avert2 = "<p class='erreur-fiche'>Vous n'avez pas renseigné la date.</p>";
 	   	}
-		if($author == ''){
+		if($authorId == ''){
 	    	$avert3 = "<p class='erreur-fiche'>Vous n'avez pas sélectionné d'auteur.</p>";
 	   	}		
 		if($content == ''){
@@ -55,16 +55,11 @@ if($_POST['submit_news']=='Ajouter'){
 	} else {
 	    
 		$userManager = new UserMAnager();
-		$user = $userManager->userData($author);
-		
-		
-		$news = new News(0,$title, $content, $date, $user);
-		
-		$newsAdd = new NewsManager();
-		$newsId = $newsAdd->add($news);
-		
+		$author = $userManager->selectById($authorId);
+		$news = new News(0,$title, $content, $date, $author);
+		$newsManager = new NewsManager();
+		$newsId = $newsManager->add($news);
 		header('Location: news_edit.php?news='.$newsId.'&result=valide');
-		
 	}
 }
 
@@ -126,13 +121,13 @@ if($_POST['submit_news']=='Ajouter'){
                     </div>	
                     <div class="titre5 col_name">Auteur '.$obligatoire.'</div>	
                     <div class="titre5 col_value';if($avert3 != ''){ echo ' select_error';} echo '" >
-					<select name="author" id="author">
-					<option value=""';if($author == ''){ echo ' selected="selected"';} echo '>Choisir un auteur</option>';
-                    foreach($users as $user) {
-					echo '
-					<option value="'.$user->getId().'"';if($author == $user->getId()){ echo ' selected="selected"';} echo '>'.$user->getName().' '.$user->getLastname().'</option>';
-					} echo '
-					</select>
+										<select name="author" id="author">
+											<option value=""';if($authorId == ''){ echo ' selected="selected"';} echo '>Choisir un auteur</option>';
+                    			foreach($users as $user) {
+													echo '
+											<option value="'.$user->getId().'"';if($authorId == $user->getId()){ echo ' selected="selected"';} echo '>'.$user->getName().' '.$user->getLastname().'</option>';
+													} echo '
+										</select>
                     </div>	
                     <div class="titre5 col_name">Contenu '.$obligatoire.'</div>							
                     <div class="titre5 col_value">

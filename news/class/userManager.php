@@ -82,11 +82,11 @@ class UserManager extends DbConnect {
     }	
   }
   
-  public function userData(int $idUser) {
+  public function selectById(int $idUser) {
     try {
       $sth = $this->bdd->prepare("SELECT id, role, name, lastname, email, login FROM `user` WHERE id = :id ");
-	  $sth->bindParam(':id', $idUser ,\PDO::PARAM_INT);
-	  $sth->execute();
+	    $sth->bindParam(':id', $idUser ,\PDO::PARAM_INT);
+	    $sth->execute();
       $user = $sth->fetch(\PDO::FETCH_ASSOC);
       $dataUser = new \User($user['id'], $user['role'], $user['name'], $user['lastname'], $user['email'], $user['login'] );
       

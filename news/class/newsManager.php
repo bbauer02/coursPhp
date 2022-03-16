@@ -6,17 +6,16 @@ class NewsManager extends DbConnect {
 
   public function add(News $news) {
     try {
-      $sth = $this->bdd->prepare("INSERT INTO `news`(`id`, `title`, `content`, `date`, `author`) VALUES (0,:title,:content,:date,:author)");
+      $sth = $this->bdd->prepare("INSERT INTO `news`(`id`, `title`, `content`, `date`, `author`) VALUES (0,:title,:content,:date,:authorId)");
       
       $title = $news->getTitle();
       $content = $news->getContent();
-      $date = $news->getDate();
-      $author = $news->getAuthor();
-      
+      $date = date("Y-m-d",strtotime ($news->getDate()));
+      $authorId = $news->getAuthor()->getId();
       $sth->bindParam(':title', $title ,PDO::PARAM_STR);
       $sth->bindParam(':content', $content ,PDO::PARAM_STR);
       $sth->bindParam(':date', $date ,PDO::PARAM_STR);
-      $sth->bindParam(':author', $author ,PDO::PARAM_INT);
+      $sth->bindParam(':authorId', $authorId ,PDO::PARAM_INT);
       $sth->execute();
       $newsId = $this->bdd->lastInsertId();
       return $newsId;
@@ -31,7 +30,7 @@ class NewsManager extends DbConnect {
       $title = $news->getTitle();
       $content = $news->getContent();
       $date = $news->getDate();
-      $author = $news->getAuthor();
+      $author = $news->getAuthor()->getId();
       $id = $news->getId();
 	  $sth->bindParam(':title', $title ,PDO::PARAM_STR);
       $sth->bindParam(':content', $content ,PDO::PARAM_STR);
@@ -62,17 +61,12 @@ class NewsManager extends DbConnect {
       $sth = $this->bdd->prepare("SELECT news.id, title, content, date, user.id as user_id, role, name, lastname, email, login FROM `news` LEFT JOIN user ON news.author = user.id ORDER BY date");
       $sth->execute();
       $news_list = $sth->fetchAll(PDO::FETCH_ASSOC);
+	    $News = array();	  
 	  
-	  
-	  $News = array();	  
-	  
-	  foreach($news_list as $news) {
-		
-		$author = new User($news['user_id'], $news['role'], $news['name'], $news['lastname'], $news['email'], $news['login']);
-		
-	    $News[] = new News($news['id'], $news['title'], $news['content'], $news['date'], $author);
-	  
-	  }
+      foreach($news_list as $news) {
+        $author = new User($news['user_id'], $news['role'], $news['name'], $news['lastname'], $news['email'], $news['login']);
+        $News[] = new News($news['id'], $news['title'], $news['content'], $news['date'], $author);
+      }
   
       return $News;
     }
@@ -81,17 +75,14 @@ class NewsManager extends DbConnect {
     }	
   }
   
-  public function newsData(int $idNews) {
+  public function selectById(int $idNews) {
     try {
-      $sth = $this->bdd->prepare("SELECT news.id, title, content, date, user.id as user_id, role, name, lastname, email, login FROM `news` LEFT JOIN user ON news.author = user.id WHERE id = :id ");
-	  $sth->bindParam(':id', $idNews ,\PDO::PARAM_INT);
-	  $sth->execute();
-      $news = $sth->fetch(\PDO::FETCH_ASSOC);
-      
-	  $author = new User($news['user_id'], $news['role'], $news['name'], $news['lastname'], $news['email'], $news['login']);
-	  
-	  $dataNews = new News($news['id'], $news['title'], $news['content'], $news['date'], $author);
-      
+      $sth = $this->bdd->prepare("SELECT news.id, title, content, date, user.id as user_id, role, name, lastname, email, login FROM `news` LEFT JOIN user ON news.author = user.id WHERE news.id = :id ");
+	    $sth->bindParam(':id', $idNews ,PDO::PARAM_INT);
+	    $sth->execute();
+      $news = $sth->fetch(PDO::FETCH_ASSOC);
+	    $author = new User($news['user_id'], $news['role'], $news['name'], $news['lastname'], $news['email'], $news['login']);
+	    $dataNews = new News($news['id'], $news['title'], $news['content'], $news['date'], $author);
       return $dataNews;
     }
     catch(\Exception $e) {

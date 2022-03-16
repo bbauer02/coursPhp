@@ -5,7 +5,7 @@ include('class/user.php');
 
 
 $userManager = new UserManager();
-$userData = $userManager->userData($_GET['user']);
+$userData = $userManager->selectById($_GET['user']);
 $var['name'] = $userData -> getName();
 $var['lastname'] = $userData -> getLastname();
 $var['role'] = $userData -> getRole();
