@@ -1,0 +1,124 @@
+div#gauche{
+	float:left;
+	width:300px;
+}
+div#col-gauche{
+	position:relative;
+	margin: 15px 0 0 0;
+	width:279px;
+	border-left:1px solid #dfdfdf;
+	border-right:1px solid #dfdfdf;
+	border-bottom:1px solid #dfdfdf;
+	background:#e4ecef;
+	min-height:430px;
+}
+div#titre-col-gauche{
+	position:relative;
+	width:100%;
+	margin:0;padding:0;
+	text-align:center;
+	background:url(../img/administration/test.jpg) repeat-x;
+	color: #FFFFFF;
+	height:25px;
+	line-height:25px;
+	font-size: 0.9em;
+	font-weight:bold;
+}
+div#menu-col-gauche p{
+	position:relative;
+	margin:0;padding:0;
+	height:30px;
+	line-height:30px;
+	font-size:0.9em;
+	border-bottom:1px dotted #666666;
+	text-indent:10px;
+}
+div#menu-col-gauche p.actif a{	
+	color:#64808b;
+	width:100%;
+	display:block;
+	text-decoration:none;
+}
+div#menu-col-gauche p.actif:hover{	
+	font-weight:bold;
+}
+div#menu-col-gauche p.inactif a{
+	color:#cccccc;
+	font-style:italic;
+	width:100%;
+	display:block;
+	text-decoration:none;
+}
+div#droite{
+	float:right;
+	width:890px;
+	margin:0 auto;padding:0;
+}
+div#haut{
+	width:100%;
+}
+div#titre{
+	width:300px;
+}
+div#fil-ariane {
+	width:589px;
+}
+div#actions{
+	width:100%;
+}
+div#contenu {
+	width:100%;
+}
+table.formulaire{
+	width:850px;
+}
+td.titre5{
+	height:40px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+}
+td.titre7{
+	height:25px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+}
+td.titre8{
+	height:25px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:0px;
+	text-align:left;
+}
+td.titre9{
+	height:15px;
+	font-size:0.7em;
+	color:#009900;
+	font-weight:bold;
+	text-indent:0px;
+	text-align:left;
+}
+td.titre6{
+	height:40px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+	border-top:1px dashed #64808b;
+	border-bottom:1px dashed #64808b;
+}
+.obligatoire{
+	color:#CC0000;
+}
+table.formulaire td.erreur, table.liste td.erreur{
+	height:40px;
+	font-size:0.7em;
+	font-weight:bold;
+	text-indent:15px;
+	border-bottom:1px solid #CC0000;
+	background:#ffb4b4;
+}

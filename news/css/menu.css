@@ -1,0 +1,196 @@
+/* MENU */
+
+div#header_responsive {display:none;}
+
+div#menu {width: 100%; margin:0 auto; background:#e8e8e8; color:#333; display:table; z-index:99;}
+
+
+div#menu li.menu {
+	border-right:1px solid #FFF;
+	float:left;
+	width:auto;
+	height:auto;
+}
+
+div#menu li.menu_end {
+	border-right:0px;
+}
+
+div#menu li.menu_inventaire_on {
+	background:#0fa200;
+	color:#FFF;
+}
+
+div#menu li a.menu1, div#menu li a.menu1b {
+	/*height:30px;
+	line-height:30px;*/
+	display:block;
+	text-decoration:none;
+	text-align:center;
+	font-size:1.1em;
+	color:inherit;
+	padding:10px 19px;
+}
+
+.menu {background:none;}
+.menu a {width:auto;}
+.menur {font-variant:normal;}
+
+div#menu li a.menu1b {
+	cursor:default;
+}
+div#menu li:hover a.menu1, div#menu li:hover a.menu1b {background-image:linear-gradient(#00a9a0,#03d0c4); color:#FFF;}
+/*permet de garder la couleur d'�criture rouge des menus principaux quand on survole ses sous menus et sous sous menus*/
+div#menu li.menu:hover a.menu1, div#menu li.menu:hover a.menu1b{/*color:#FF0000;*/}
+div#menu ul {padding: 0;margin:0;}
+div#menu ul li {position:relative;margin:0; padding:0;list-style:none;z-index:99;}
+div#menu ul li.ssmenu { float: left;width:100%;}
+
+#header_coord_r {width:100%; padding:20px 20px;}
+
+#header_coord_r p {
+  padding: 5px 0 5px 40px;
+  margin: 5px 0;
+  width: 100%;
+  font-size:1.2em;
+}
+
+#header_coord_r p a {color:inherit; text-decoration:none;}
+
+p.header_coord_compte {
+  background: url(../img/administration/admin_compte.png) left center no-repeat;
+}
+p.header_coord_disconnect {
+  background: url(../img/administration/admin_logout.png) left center no-repeat;
+}
+
+
+/*
+div#menu ul.niveau2 {position: absolute; top: 44px; display:none;z-index:102;width:100%;max-width:170px;background:#CCCCCC;}
+
+div#menu ul.niveau2 li:hover a.menu2{color:#333333;}
+div#menu ul.niveau2 li a:hover{color:#000000;background:#FFFFFF;}
+div#menu ul.niveau2 li a{
+	width: 100%;
+	min-width:145px;
+	border-bottom:1px dotted #666666;
+	padding:10px 0;
+	text-indent:8px;
+	display:block;
+	text-decoration:none;
+	color: #333333;
+	font-size:1em;
+}
+div#menu ul.niveau1 li:hover ul.niveau2{width:100%;min-width:145px;max-width:170px;display:block;}
+*/
+
+div#menu ul.niveau2 {/*position: fixed;*/ position:absolute; /*top: 47px;*/ display:none;z-index:102;width:auto;/*max-width:170px;*/background:#dfdfdf;}
+
+/*permet de garder le style survol� du menu parent quand on survole un sous menu*/
+div#menu ul.niveau2 li:hover a.menu2{color:#333333;}
+div#menu ul.niveau2 li a:hover{color:#000000;background:url(../img/administration/ssmenu_fleche.png) center left no-repeat, #FFFFFF;}
+div#menu ul.niveau2 li a{
+	width: auto;
+	min-width:145px;
+	border-top:1px dotted #666666;
+	/*height: 25px;
+	line-height: 25px;*/
+	padding:10px 15px;
+	text-indent:8px;
+	display:block;
+	text-decoration:none;
+	color: #333333;
+	font-size:1em;
+	background:url(../img/administration/ssmenu_fleche.png) center left no-repeat; background-position:5px;
+}
+div#menu li.menu_end ul.niveau2 {max-width:180px;}
+
+div#menu ul.niveau1 li:hover ul.niveau2{width:auto;min-width:145px;/*max-width:170px;*/display:block;}
+
+div#menu ul.niveau3 li a{
+	padding:5px 5px 5px 30px;
+	background:#f6f6f6 url(../img/administration/ssmenu_fleche.png) center left no-repeat; background-position:20px;
+}
+div#menu ul.niveau3 li a:hover{color:#008dff;background:url(../img/administration/ssmenu_fleche.png) center left no-repeat, #FFFFFF;background-position:15px;}
+
+
+div#menu li a.menu_fleche {background:url(../img/administration/menu_fleche.png) center right no-repeat;background-position:99%;padding:10px 30px 10px 20px;}
+
+/************************* MENU RESPONSIVE ***************************/
+/*
+#header_coord_r {
+	padding:0 10px 15px 20px;
+	margin:15px 0 0 0;
+}
+#header_coord_r p { padding:5px 0 5px 40px;margin:5px 0;}
+#header_coord_r a { color:inherit; text-decoration:none;}
+#header_social_r {
+	overflow:hidden;
+	padding:0 10px 15px 20px;
+	margin:15px 0;
+}
+
+.menu_list_r .mm-navbar.menu_r_titre {
+	padding:0 10px !important;
+	border-bottom-style:none;
+	font-size:1.15em;
+}
+*/
+
+.mm-panels > .mm-panel > .mm-navbar + .mm-listview {
+  margin-top: 0 !important;
+}
+
+.mm-navbar {background:#741b63;border-bottom:0 !important; padding:10px 40px !important;}
+
+.mm-title {color:#FFF !important;font-size:1.2em;text-transform:uppercase;}
+
+.menu_list_r .mm-navbar.menu_r_titre {
+	padding:20px 10px 0 0 !important;
+	/*border-bottom:1px solid #d6d6d6 !important;*/
+	border-bottom:0 !important;
+	background:none;
+	text-align:left !important;
+}
+.menu_list_r .mm-navbar.menu_r_titre::after {border-bottom:0 !important;}
+
+.menu_list_r .mm-navbar.menu_r_titre .mm-title {font-size:1.4em;color:#741b63 !important;}
+
+.menu_list_r li.niveau1 {font-size:1.3em;text-transform:uppercase; padding:10px 0;}
+
+.menu_list_r li.niveau1:hover { background:#e4e4e4;}
+
+.mm-listview {font-size:1.2em;}
+
+
+
+@media screen and (max-width : 1600px) {
+	/*div#menu li.menu_end ul.niveau2 {right:0;max-width:180px;}*/
+}
+
+@media screen and (max-width : 1550px) {
+	/*div#menu li a.menu1, div#menu li a.menu1b {padding:10px 15px;}
+	div#menu li a.menu_fleche {padding:10px 20px 10px 10px;}*/
+}
+
+@media screen and (max-width : 1450px) {
+	/*div#menu li a.menu1, div#menu li a.menu1b {padding:10px 12px;}
+	div#menu li a.menu_fleche {padding:10px 15px 10px 10px;}*/
+}
+
+@media screen and (max-width : 1350px) {	
+	/*div#menu li a.menu1, div#menu li a.menu1b {padding:10px 10px;font-size:1em;}
+	div#menu li a.menu_fleche {padding:10px 15px 10px 5px;}*/
+}
+
+@media screen and (max-width : 1200px) {	
+	/*div#menu li a.menu1, div#menu li a.menu1b {padding:10px 6px;}
+	div#menu li a.menu_fleche {padding:10px 15px 10px 2px;}*/
+}
+
+@media screen and (max-width : 959px) {	
+	div#menu {z-index:100;margin:-45px 0 0 0;}
+
+	div#menu_large {display:none;}
+	div#header_responsive {display:block;}
+}

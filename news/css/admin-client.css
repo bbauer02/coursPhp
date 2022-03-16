@@ -1,0 +1,14 @@
+div#menu li.menu-5 {
+	background-image:linear-gradient(#008dff,#00c4fe); color:#FFF;
+}
+
+.context_filtre_all {width:100%;}
+.context_filtre_all .filtre_item {width:calc(20% - 21px);}
+
+.context_filtre_all .filtre_submit {width:75px;}
+@media screen and (max-width : 650px) {
+	
+}
+@media screen and (max-width : 480px) {
+	
+}

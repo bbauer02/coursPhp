@@ -12,23 +12,26 @@ class TagManager extends DbConnect {
       
       $sth->bindParam(':label', $label ,PDO::PARAM_STR);
       $sth->execute();
-      $tag->setId($this->bdd->lastInsertId());
-      return true;
+      
+      $tagId = $this->bdd->lastInsertId();
+      return $tagId;
     }
     catch(Exception $e) {
-      die("Erreur lors de l'ajout");
+      die("Erreur lors de l'ajout du tag");
     }
   }
   public function edit(Tag $tag) {
     try {
       $sth = $this->bdd->prepare("UPDATE `tag` SET `label` = :label WHERE id = :id");
       $label = $tag->getLabel();
+	  $id = $tag->getId();
       $sth->bindParam(':label', $label ,PDO::PARAM_STR);
+      $sth->bindParam(':id', $id ,PDO::PARAM_INT);
       $sth->execute();
       return true;
     }
     catch(Exception $e) {
-      die("Erreur lors de la modification");
+      die("Erreur lors de la modification du tag");
     }
   }
   public function delete(Tag $tag) {
@@ -39,7 +42,7 @@ class TagManager extends DbConnect {
       $sth->execute();
     }
     catch(Exception $e) {
-      die("Erreur lors de la suppression");
+      die("Erreur lors de la suppression du tag");
     }	
   }
 
@@ -61,7 +64,7 @@ class TagManager extends DbConnect {
       return $Tag;
     }
     catch(Exception $e) {
-      die("Erreur lors de la suppression");
+      die("Erreur lors de la récupération de la liste des tags");
     }	
   }
 
@@ -77,7 +80,7 @@ class TagManager extends DbConnect {
       return true;
     }
     catch(Exception $e) {
-      die("Erreur lors de l'ajout");
+      die("Erreur lors de l'affectation du tag à l'actualité");
     }
   }
 
@@ -91,7 +94,7 @@ class TagManager extends DbConnect {
       $sth->execute();
     }
     catch(Exception $e) {
-      die("Erreur lors de la suppression du tag de l'article");
+      die("Erreur lors de la suppression du tag associé à l'article");
     }	
   }
 
@@ -106,9 +109,23 @@ class TagManager extends DbConnect {
       $sth->execute();
     }
     catch(Exception $e) {
-      die("Erreur lors de la suppression du tag de l'article");
+      die("Erreur lors de la suppression de l'ensemble des tags associés à l'article");
     }	
   }
 
+  public function tagData(int $idTag) {
+    try {
+      $sth = $this->bdd->prepare("SELECT id, label FROM `tag` WHERE id = :id ");
+	  $sth->bindParam(':id', $idTag ,\PDO::PARAM_INT);
+	  $sth->execute();
+      $tag = $sth->fetch(\PDO::FETCH_ASSOC);
+      $dataTag = new \Tag($tag['id'], $tag['label']);
+      
+      return $dataTag;
+    }
+    catch(\Exception $e) {
+      die("Erreur lors de la récupération des données du tag");
+    }	
+  }
 
 }

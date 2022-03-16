@@ -21,19 +21,20 @@ class UserManager extends DbConnect {
       $sth->bindParam(':lastname', $lastname ,\PDO::PARAM_STR);
       $sth->bindParam(':email', $email ,\PDO::PARAM_STR);
       $sth->bindParam(':login', $login ,\PDO::PARAM_STR);
-      $sth->bindParam(':password', $password ,\PDO::PARAM_STR);
+      $sth->bindParam(':password', SHA1($password) ,\PDO::PARAM_STR);
       $sth->execute();
-      $user->setId($this->bdd->lastInsertId());
-      return true;
+      $userId = $this->bdd->lastInsertId();
+      return $userId;
     }
     catch(\Exception $e) {
-      die("Erreur lors de l'ajout");
+      die("Erreur lors de l'ajout d'un auteur");
     }
   }
   public function edit(User $user) {
     try {
       $sth = $this->bdd->prepare("UPDATE `user` SET `role` = :role, `name` = :name, `lastname` = :lastname, `email` = :email, `login` = :login, `password` = :password WHERE id = :id");
-      $role = $user->getRole();
+      $id = $user->getId();
+	  $role = $user->getRole();
       $name = $user->getName();
       $lastname = $user->getLastname();
       $email = $user->getEmail();
@@ -44,12 +45,13 @@ class UserManager extends DbConnect {
       $sth->bindParam(':lastname', $lastname ,\PDO::PARAM_STR);
       $sth->bindParam(':email', $email ,\PDO::PARAM_STR);
       $sth->bindParam(':login', $login ,\PDO::PARAM_STR);
-      $sth->bindParam(':password', $password ,\PDO::PARAM_STR);
+      $sth->bindParam(':password', SHA1($password) ,\PDO::PARAM_STR);
+      $sth->bindParam(':id', $id ,\PDO::PARAM_INT);
       $sth->execute();
       return true;
     }
     catch(\Exception $e) {
-      die("Erreur lors de la modification");
+      die("Erreur lors de la modification d'un auteur");
     }
   }
   public function delete(User $user) {
@@ -60,7 +62,7 @@ class UserManager extends DbConnect {
       $sth->execute();
     }
     catch(\Exception $e) {
-      die("Erreur lors de la suppression");
+      die("Erreur lors de la suppression d'un auteur");
     }	
   }
 
@@ -76,7 +78,23 @@ class UserManager extends DbConnect {
       return $Users;
     }
     catch(\Exception $e) {
-      die("Erreur lors de la suppression");
+      die("Erreur lors de la récupération de l'ensemble des auteurs");
     }	
   }
+  
+  public function userData(int $idUser) {
+    try {
+      $sth = $this->bdd->prepare("SELECT id, role, name, lastname, email, login FROM `user` WHERE id = :id ");
+	  $sth->bindParam(':id', $idUser ,\PDO::PARAM_INT);
+	  $sth->execute();
+      $user = $sth->fetch(\PDO::FETCH_ASSOC);
+      $dataUser = new \User($user['id'], $user['role'], $user['name'], $user['lastname'], $user['email'], $user['login'] );
+      
+      return $dataUser;
+    }
+    catch(\Exception $e) {
+      die("Erreur lors de la récupération des données de l'auteur");
+    }	
+  }
+  
 }

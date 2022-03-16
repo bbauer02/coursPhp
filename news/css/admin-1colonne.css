@@ -1,0 +1,101 @@
+div#gauche{
+	display:none;
+}
+div#droite{
+	width:100%;
+	margin:0 auto; padding:0;
+}
+div#haut{
+	width:100%;
+}
+div#fil-ariane {
+	width:789px;
+}
+div#actions{
+	width:100%;
+}
+div#contenu {
+	width:100%;
+}
+table.formulaire, table.liste{
+	margin:20px auto 0 auto;
+}
+
+/* pour les menus gérés pour les BLOCS */
+
+table.resultat {
+	margin:0 auto 0 auto;
+	border-right: 1px solid #e8e8e8;
+	border-left: 1px solid #e8e8e8;
+	background:#FFFFFF;
+}
+table.resultat_end_table {
+	border-bottom: 1px solid #e8e8e8;
+}
+td.niveau1 {
+	width:15px;
+}
+td.niveau2 {
+	width:15px;
+}
+td.niveau3 {
+	width:65px;
+}
+td.niveau4 {
+	width:115px;
+}
+td.niveau5 {
+	width:165px;
+}
+/***************************************/
+
+td.titre5{
+	height:40px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+}
+td.titre7{
+	height:25px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+}
+td.titre8{
+	height:25px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:0px;
+	text-align:left;
+}
+td.titre9{
+	height:15px;
+	font-size:0.7em;
+	color:#009900;
+	font-weight:bold;
+	text-indent:0px;
+	text-align:left;
+}
+td.titre6{
+	height:40px;
+	font-size:0.7em;
+	color:#64808b;
+	font-weight:bold;
+	text-indent:15px;
+	border-top:1px dashed #64808b;
+	border-bottom:1px dashed #64808b;
+}
+.obligatoire{
+	color:#CC0000;
+}
+table.formulaire td.erreur, table.liste td.erreur{
+	height:40px;
+	font-size:0.7em;
+	font-weight:bold;
+	text-indent:15px;
+	border-bottom:1px solid #CC0000;
+	background:#ffb4b4;
+}
